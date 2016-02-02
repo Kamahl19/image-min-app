@@ -1,0 +1,66 @@
+.dropzone {
+    width: 100vw;
+    height: calc(100vh - 24px);
+    position: absolute;
+}
+
+.bordered-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+}
+
+.status-bar {
+    width: 100vw;
+    height: 24px;
+    position: fixed;
+    bottom: 0;
+    padding: 0 10px;
+    line-height: 24px;
+    font-size: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.status-bar img {
+    margin-top: -1px;
+}
+
+.portal {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    position: relative;
+}
+
+.slider .left.image {
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    border-right: 3px solid white;
+    margin-right: -5px;
+}
+
+.slider .right.image {
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+}
+
+.slider img {
+    max-width: none;
+}

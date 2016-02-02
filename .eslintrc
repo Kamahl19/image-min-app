@@ -1,0 +1,22 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/jsx-indent-props": [2, 4],
+    "func-names": 0,
+    "comma-dangle": 0,
+    "brace-style": [2, "stroustrup", { "allowSingleLine": true }],
+    "indent": [2, 4, { "SwitchCase": 1 }],
+    "no-use-before-define": [2, "nofunc"]
+  },
+  "plugins": [
+    "react"
+  ]
+}
