@@ -1,7 +1,9 @@
 import { ipcRenderer } from 'electron';
 
+import lodash from 'lodash';
 import React from 'react';
 import Portal from 'react-portal';
+import StatusBar from './components/StatusBar';
 import Dropzone from './components/Dropzone';
 import CompareImages from './components/CompareImages';
 import ImagesTable from './components/ImagesTable';
@@ -17,22 +19,39 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        ipcRenderer.on('images.minified', this.onImageMinified);
+        ipcRenderer.on('minification.started', this.onMinificationStarted);
+        ipcRenderer.on('minification.finished', this.onMinificationFinished);
     },
 
     componentWillUnmount() {
-        ipcRenderer.off('images.minified', this.onImageMinified);
+        ipcRenderer.off('minification.started', this.onMinificationStarted);
+        ipcRenderer.off('minification.finished', this.onMinificationFinished);
     },
 
     onFilesLoaded(filePath) {
         ipcRenderer.send('images.dropped', filePath);
     },
 
-    onImageMinified(event, image) {
-        if (image) {
+    onMinificationStarted(e, imageInfo) {
+        if (imageInfo) {
             this.setState({
-                imageQueue: this.state.imageQueue.concat(image)
+                imageQueue: this.state.imageQueue.concat(imageInfo)
             });
+        }
+    },
+
+    onMinificationFinished(e, imageInfo) {
+        if (imageInfo) {
+            const imageQueue = this.state.imageQueue;
+
+            lodash.find(this.state.imageQueue, (item, i) => {
+                if (item.uid === imageInfo.uid) {
+                    imageQueue[i] = imageInfo;
+                    return true;
+                }
+            });
+
+            this.setState({ imageQueue });
         }
     },
 
@@ -63,9 +82,7 @@ export default React.createClass({
 
                     { content }
                 </Dropzone>
-                <div className="status-bar">
-                    Optimizing… <img src="./imgs/spin.svg" />
-                </div>
+                <StatusBar imageQueue={this.state.imageQueue} />
             </div>
         );
     }

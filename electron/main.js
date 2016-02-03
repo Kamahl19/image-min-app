@@ -1,4 +1,4 @@
-/* eslint strict: 0 */
+/* eslint strict: 0, no-console: 0 */
 'use strict';
 
 import fs from 'fs';
@@ -57,9 +57,11 @@ app.on('ready', () => {
 });
 
 function minifyImage(filePath) {
-    imageMinifier(filePath, (image) =>
-        mainWindow.webContents.send('images.minified', image)
-    );
+    imageMinifier(filePath, (imageInfo) => {
+        mainWindow.webContents.send('minification.started', imageInfo);
+    }, (imageInfo) => {
+        mainWindow.webContents.send('minification.finished', imageInfo);
+    });
 }
 
 function traverseFilesAndFolders(filePath, cb) {

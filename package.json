@@ -3,6 +3,8 @@
   "productName": "ImageMin App",
   "version": "0.1.0",
   "description": "Image compression app based on Electron",
+  "bugs": "https://github.com/Kamahl19/image-min-app/issues",
+  "repository": "Kamahl19/image-min-app",
   "author": {
     "name": "Martin Litvaj",
     "email": "kamahl19@gmail.com",
@@ -96,6 +98,8 @@
     "history": "^1.17.0",
     "imagemin": "^4.0.0",
     "imagemin-pngquant": "^4.2.0",
+    "lodash": "^4.2.0",
+    "path-exists": "^2.1.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-portal": "^1.7.0",
